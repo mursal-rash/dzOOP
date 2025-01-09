@@ -1,0 +1,19 @@
+rvalue
+1. 100
+3. a + 1
+6. l + r
+7. std::abs(a)
+8. funca()
+15. staticcast<int>(a)
+21. +a
+
+lvalue
+2. a
+4. l
+5. r
+9. funcb(a)
+10. funcb(l)
+11. funcb(r)
+16. staticcast<int&>(a)
+19. rand() > 5 ? a : 10
+20. rand() > 5 ? a : r
