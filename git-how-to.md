@@ -14,3 +14,6 @@
 2. Нажмите **Code → SSH** и скопируйте ссылку.  
 3. В терминале выполните команду `git clone` с этой ссылкой.  
 4. Перейдите в папку репозитория.  
+
+
+https://github.com/FaeXaMNeR/mipt-get/invitations
