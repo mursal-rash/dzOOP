@@ -15,52 +15,46 @@
 3. В терминале выполните команду `git clone` с этой ссылкой.  
 4. Перейдите в папку репозитория.  
 
-
 import RPi.GPIO as GPIO
 
-
-DAC = [8, 11, 7, 1, 0, 5, 12, 6]
 GPIO.setwarnings(False)
+
+dac = [8, 11, 7, 1, 0, 5, 12, 6]
+
 GPIO.setmode(GPIO.BCM)
+GPIO.setup(dac, GPIO.OUT)
 
-def getBin(n):
-    s = bin(n)[2:]
-    return '0' * (8 - len(s)) + s
+def dec2bin(num):
+    number = [0 for i in range(len(dac))]
+    d_num = num % 256
+    bin_num = bin(d_num)
 
-def main():
-    GPIO.setup(DAC, GPIO.OUT)
+    i = -1
+    while bin_num[i] != 'b':
+        number[i] = int(bin_num[i])
+        i -= 1
 
-    try:
-        while (True):
-            s = input("Give a number from 0 to 255: ")
+    return number
 
-            try:
-                n = int(s)
-
-                if (n < 0):
-                    print("Input an integer >= 0")
-                    continue
-                elif (n > 255):
-                    print("Input an integer in [0..255]")
-                    continue
-
-                print(f"Voltage should be {float(n) * 3.3 / 256.0:.4f}")
-                GPIO.output(DAC, list(map(int, getBin(n))))
-            except ValueError:
-                if s == 'q': break
-
-                try:
-                    n = float(s)
-                    print("Input an integer!!!")
-                except ValueError:
-                    print("Input not a number!!!")
-
-    finally:
-        GPIO.output(DAC, [0] * len(DAC))
-        
-        
+try:
+    while True:
+        num = input()
+        try:
+            num = int(num)
+            if 0 <= num <= 255:
+                GPIO.output(dac, dec2bin(num))
+                voltage = float(num) / 256.0 * 3.3
+                print(f"Напряжение {voltage:.4} В")
+            else:
+                if num < 0:
+                    print("Число должно быть положительным")
+                elif num > 255:
+                    print("Число больше 255")
+        except Exception:
+            if num == "q":
+                break
 
 
-if __name__ == '__main__':
-    main()
-- Загрузите ветку в удалённый репозиторий с помощью команды отправки.
+finally:
+    GPIO.output(dac, 0)
+    GPIO.cleanup()
