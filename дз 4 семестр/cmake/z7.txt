@@ -1,0 +1,65 @@
+1. func()
+Number of arguments = 0
+Arguments:
+---
+
+2. func(Cat)
+Number of arguments = 1
+Arguments:
+Cat
+---
+
+3. func(Cat Mouse Dog)
+Number of arguments = 3
+Arguments:
+Cat
+Mouse
+Dog
+---
+
+4. func("Cat Mouse Dog")
+Number of arguments = 1
+Arguments:
+Cat Mouse Dog
+---
+
+5. func(Cat;Mouse;Dog)
+Number of arguments = 3
+Arguments:
+Cat
+Mouse
+Dog
+---
+
+6. func("Cat;Mouse;Dog")
+Number of arguments = 1
+Arguments:
+Cat;Mouse;Dog
+---
+
+7. func(X)
+Number of arguments = 1
+Arguments:
+X
+---
+
+8. func(${X})
+Number of arguments = 3
+Arguments:
+Tiger
+Lion
+Elephant
+---
+
+9. func("${X}")
+Number of arguments = 1
+Arguments:
+Tiger;Lion;Elephant
+---
+
+10. func("Cat;Mouse;Dog" "${X}")
+Number of arguments = 2
+Arguments:
+Cat;Mouse;Dog
+Tiger;Lion;Elephant
+---
